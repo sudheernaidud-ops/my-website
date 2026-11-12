@@ -1,4 +1,5 @@
 // Portfolio Website JavaScript
+// Updated with Sudheernaidu Doppalapudi's resume information
 
 // Theme Toggle Functionality
 const themeToggle = document.getElementById('theme-toggle');
@@ -86,49 +87,64 @@ function updateActiveNav() {
     });
 }
 
+// Download Resume functionality
+function setupResumeDownload() {
+    // Create download button
+    const resumeBtn = document.createElement('a');
+    resumeBtn.href = 'resume.docx';
+    resumeBtn.download = 'Sudheernaidu_Doppalapudi_Resume.docx';
+    resumeBtn.className = 'btn btn-primary resume-download';
+    resumeBtn.innerHTML = '<i class="fas fa-download"></i> Download Resume';
+    resumeBtn.style.marginLeft = '1rem';
+
+    // Add to hero buttons
+    const heroButtons = document.querySelector('.hero-buttons');
+    heroButtons.appendChild(resumeBtn);
+}
+
 // Add sample projects for demo
 const projectsGrid = document.querySelector('.projects-grid');
 const sampleProjects = [
     {
-        title: 'E-commerce Website',
-        description: 'A full-featured e-commerce platform with product management, cart functionality, and payment integration.',
+        title: 'Oracle Database Migration',
+        description: 'Migrated complex legacy systems from Oracle 11g to Oracle 12c, implementing data validation procedures and optimizing query performance for 500+ concurrent users.',
         category: 'web',
-        image: 'https://images.unsplash.com/photo-1556742049-0c6b599c8a8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+        image: 'https://images.unsplash.com/photo-1560622013-1423b2c23b38?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
         link: '#'
     },
     {
-        title: 'Task Management App',
-        description: 'A collaborative task management application with real-time updates, team assignments, and progress tracking.',
+        title: 'AWS Cloud Infrastructure',
+        description: 'Designed and implemented scalable cloud infrastructure using AWS services including EC2, RDS, S3, and CloudWatch. Set up automated deployments and monitoring systems for 24/7 operations.',
         category: 'mobile',
-        image: 'https://images.unsplash.com/photo-1611224923853-80b654b08484?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+        image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
         link: '#'
     },
     {
-        title: 'Dashboard UI Kit',
-        description: 'A comprehensive dashboard UI kit with charts, tables, and interactive components for data visualization.',
+        title: 'ITIL Support System',
+        description: 'Implemented comprehensive ITIL-based incident management system with automated workflows, SLA monitoring, and ticket routing. Reduced response times by 40% and improved customer satisfaction.',
         category: 'design',
-        image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+        image: 'https://images.unsplash.com/photo-1516321318789-4a6b3e2b5b2b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
         link: '#'
     },
     {
-        title: 'Weather App',
-        description: 'A clean and intuitive weather application with location-based forecasts, current conditions, and 7-day outlook.',
-        category: 'mobile',
-        image: 'https://images.unsplash.com/photo-1504608524841-612d07931b90?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
-        link: '#'
-    },
-    {
-        title: 'Portfolio Template',
-        description: 'A modern portfolio template with smooth animations, dark mode support, and responsive design.',
-        category: 'design',
-        image: 'https://images.unsplash.com/photo-1498049560571-3b5ce832e686?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
-        link: '#'
-    },
-    {
-        title: 'API Service Backend',
-        description: 'A robust REST API service with authentication, data validation, and comprehensive error handling for scalable applications.',
+        title: 'ServiceNow Integration',
+        description: 'Developed custom ServiceNow workflows for incident management, KB article creation, and SOP implementation. Integrated with existing BMC Remedy systems for seamless operations.',
         category: 'web',
         image: 'https://images.unsplash.com/photo-1555066931-5ae4dc1c7f36?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+        link: '#'
+    },
+    {
+        title: 'Virtualization Platform',
+        description: 'Managed virtualization platforms including OpenStack, XCP-NG, and VMware for 1000+ virtual machines. Implemented monitoring, backup, and disaster recovery procedures.',
+        category: 'mobile',
+        image: 'https://images.unsplash.com/photo-1581091014194-9e993c18634f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+        link: '#'
+    },
+    {
+        title: 'Monitoring & Alert System',
+        description: 'Built comprehensive monitoring system using Grafana, Datadog, and Prometheus for real-time performance tracking. Implemented automated alerting and reporting for operations teams.',
+        category: 'design',
+        image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
         link: '#'
     }
 ];
@@ -145,7 +161,7 @@ function createProjectCard(project) {
                 <p class="project-description">${project.description}</p>
                 <div class="project-links">
                     <a href="${project.link}" class="project-link">
-                        <i class="fas fa-external-link-alt"></i> View Project
+                        <i class="fas fa-external-link-alt"></i> View Details
                     </a>
                 </div>
             </div>
@@ -191,6 +207,11 @@ contactForm.addEventListener('submit', function(e) {
 
     if (isValid) {
         console.log('Form submitted successfully');
+        console.log('Name:', name.value);
+        console.log('Email:', email.value);
+        console.log('Subject:', subject.value);
+        console.log('Message:', message.value);
+        alert('Thank you for your message! I will get back to you soon.');
         contactForm.reset();
     }
 });
@@ -222,6 +243,7 @@ filterBtns.forEach(btn => {
         projectCards.forEach(card => {
             if (filter === 'all' || card.getAttribute('data-category') === filter) {
                 card.style.display = 'block';
+                card.classList.add('fade-in');
             } else {
                 card.style.display = 'none';
             }
@@ -251,4 +273,8 @@ document.querySelectorAll('.project-card, .skill-category, .about-content, .cont
     observer.observe(el);
 });
 
-console.log('Portfolio app initialized successfully!');
+// Initialize everything when page loads
+window.addEventListener('load', function() {
+    setupResumeDownload();
+    console.log('Sudheernaidu Portfolio initialized successfully!');
+});
