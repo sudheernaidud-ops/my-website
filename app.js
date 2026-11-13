@@ -1,156 +1,74 @@
-const themeToggle = document.getElementById('theme-toggle');
-const html = document.documentElement;
 
-function toggleTheme() {
-    if (html.getAttribute('data-theme') === 'dark') {
-        html.removeAttribute('data-theme');
-        if (themeToggle) themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-        localStorage.setItem('theme', 'light');
-    } else {
-        html.setAttribute('data-theme', 'dark');
-        if (themeToggle) themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-        localStorage.setItem('theme', 'dark');
-    }
-}
+ // Native anchor links handle navigation and scrolling.
+ // This script manages the mobile menu, theme, and footer year.
+ const menuButton = document.querySelector('.menu-toggle');
+ const navLinks = document.querySelector('#nav-links');
 
-if (themeToggle) {
-    themeToggle.addEventListener('click', toggleTheme);
-}
+ if (menuButton && navLinks) {
+   const closeMenu = () => {
+     navLinks.classList.remove('open');
+     menuButton.setAttribute('aria-expanded', 'false');
+     menuButton.setAttribute('aria-label', 'Open navigation');
+   };
 
-if (localStorage.getItem('theme') === 'dark') {
-    html.setAttribute('data-theme', 'dark');
-    if (themeToggle) themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-}
+   menuButton.addEventListener('click', () => {
+     const open = navLinks.classList.toggle('open');
+     menuButton.setAttribute('aria-expanded', String(open));
+     menuButton.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+   });
 
-const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-const navLinks = document.querySelector('.nav-links');
+   navLinks.querySelectorAll('a').forEach(link =>
+     link.addEventListener('click', closeMenu)
+   );
 
-if (mobileMenuBtn && navLinks) {
-    mobileMenuBtn.addEventListener('click', function () {
-        navLinks.classList.toggle('active');
-        const icon = mobileMenuBtn.querySelector('i');
-        if (icon) {
-            icon.classList.toggle('fa-bars');
-            icon.classList.toggle('fa-times');
-        }
-    });
+   document.addEventListener('keydown', event => {
+     if (event.key === 'Escape') closeMenu();
+   });
+ }
 
-    navLinks.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', function () {
-            navLinks.classList.remove('active');
-            const icon = mobileMenuBtn.querySelector('i');
-            if (icon) {
-                icon.classList.add('fa-bars');
-                icon.classList.remove('fa-times');
-            }
-        });
-    });
-}
+ const themeButton = document.querySelector('.theme-toggle');
+ const root = document.documentElement;
+ let savedTheme = null;
 
-function updateActiveNav() {
-    const scrollPosition = window.scrollY + 120;
-    const sections = document.querySelectorAll('section');
-    const navItems = document.querySelectorAll('.nav-link');
+ try {
+   savedTheme = localStorage.getItem('portfolio-theme');
+ } catch (_) {}
 
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.offsetHeight;
-        const sectionId = section.getAttribute('id');
-        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-            navItems.forEach(item => {
-                item.classList.remove('active');
-                if (item.getAttribute('href') === '#' + sectionId) {
-                    item.classList.add('active');
-                }
-            });
-        }
-    });
-}
+ if (savedTheme === 'light') root.classList.add('light');
 
-window.addEventListener('scroll', updateActiveNav);
+ function syncThemeButton() {
+   if (!themeButton) return;
+   const light = root.classList.contains('light');
+   themeButton.textContent = light ? '☾' : '☀';
+   themeButton.setAttribute('aria-label',
+     light ? 'Switch to dark theme' : 'Switch to light theme');
+ }
 
-const filterButtons = document.querySelectorAll('.filter-btn');
-const experienceCards = document.querySelectorAll('.project-card');
+ syncThemeButton();
 
-filterButtons.forEach(btn => {
-    btn.addEventListener('click', function () {
-        filterButtons.forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
+ themeButton?.addEventListener('click', () => {
+   root.classList.toggle('light');
+   try {
+     localStorage.setItem('portfolio-theme',
+       root.classList.contains('light') ? 'light' : 'dark');
+   } catch (_) {}
+   syncThemeButton();
+ });
 
-        const selectedFilter = this.getAttribute('data-filter');
+ const year = document.querySelector('#year');
+ if (year) year.textContent = String(new Date().getFullYear());
 
-        experienceCards.forEach(card => {
-            const cardCategory = card.getAttribute('data-category');
-            if (selectedFilter === 'all' || cardCategory === selectedFilter) {
-                card.style.display = 'block';
-            } else {
-                card.style.display = 'none';
-            }
-        });
-    });
-});
+ const navigation = [...document.querySelectorAll('.nav-links a[href^="#"]')];
 
-const contactForm = document.getElementById('contact-form');
+ function setActiveLink() {
+   const current = location.hash || '#home';
+   navigation.forEach(link => {
+     const active = link.getAttribute('href') === current;
+     link.classList.toggle('active', active);
+     if (active) link.setAttribute('aria-current', 'location');
+     else link.removeAttribute('aria-current');
+   });
+ }
 
-function isValidEmail(email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
-
-function showError(input, message) {
-    clearError(input);
-    const errorEl = document.createElement('small');
-    errorEl.className = 'error-message';
-    errorEl.style.color = '#ef4444';
-    errorEl.style.display = 'block';
-    errorEl.style.marginTop = '0.25rem';
-    errorEl.textContent = message;
-    input.parentElement.appendChild(errorEl);
-}
-
-function clearError(input) {
-    const existing = input.parentElement.querySelector('.error-message');
-    if (existing) existing.remove();
-}
-
-if (contactForm) {
-    contactForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-        const name = document.getElementById('name');
-        const email = document.getElementById('email');
-        const subject = document.getElementById('subject');
-        const message = document.getElementById('message');
-        let isValid = true;
-
-        [name, email, subject, message].forEach(el => {
-            if (el) clearError(el);
-        });
-
-        if (name && !name.value.trim()) {
-            showError(name, 'Name is required');
-            isValid = false;
-        }
-
-        if (email && !email.value.trim()) {
-            showError(email, 'Email is required');
-            isValid = false;
-        } else if (email && !isValidEmail(email.value)) {
-            showError(email, 'Please enter a valid email');
-            isValid = false;
-        }
-
-        if (subject && !subject.value.trim()) {
-            showError(subject, 'Subject is required');
-            isValid = false;
-        }
-
-        if (message && !message.value.trim()) {
-            showError(message, 'Message is required');
-            isValid = false;
-        }
-
-        if (isValid) {
-            alert('Thank you for your message! Sudheernaidu will get back to you soon.');
-            contactForm.reset();
-        }
-    });
-}
+ window.addEventListener('hashchange', setActiveLink);
+ setActiveLink();
