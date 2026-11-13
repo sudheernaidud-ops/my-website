@@ -4,3 +4,44 @@
 @media(max-width:900px){.hero-layout{gap:40px}.skills-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.about-layout{gap:25px}.job{grid-template-columns:145px 1fr;gap:15px}}
 @media(max-width:700px){.shell{width:min(100% - 32px,1120px)}.section{padding:72px 0}.nav{height:68px}.menu-toggle{display:block}.nav-links{display:none;position:absolute;top:68px;left:0;right:0;background:var(--bg);border-bottom:1px solid var(--border);padding:18px 22px;flex-direction:column;align-items:stretch;gap:0;box-shadow:var(--shadow)}.nav-links.open{display:flex}.nav-links>a{padding:12px 0}.theme-toggle{margin-top:10px;align-self:flex-start}.hero{padding-top:70px}.hero-layout,.about-layout,.contact-panel{grid-template-columns:1fr}.hero-visual{max-width:280px;margin-top:22px}.hero-lead{font-size:1rem}.visual-label{left:0;right:0}.skills-grid,.credential-grid{grid-template-columns:1fr}.job{grid-template-columns:1fr;gap:6px;padding-left:21px}.job-date{margin-bottom:5px}.job-body{padding:19px}.contact-panel{padding:28px;gap:22px}.footer-inner{flex-direction:column;gap:6px}.fact-grid{gap:9px}.fact{padding:16px}.fact strong{font-size:1.5rem}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}}
+/* Fix oversized portfolio profile picture */
+
+.profile-frame {
+    width: 280px;
+    height: 280px;
+    max-width: 100%;
+    margin: 0 auto;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+}
+
+.profile-frame img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+}
+
+.photo-fallback {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    font-size: 64px;
+    font-weight: bold;
+}
+
+.photo-fallback[hidden] {
+    display: none;
+}
+
+@media (max-width: 600px) {
+    .profile-frame {
+        width: 200px;
+        height: 200px;
+    }
+}
+
