@@ -1,18 +1,14 @@
-// Portfolio Website JavaScript
-// Updated for Sudheernaidu Doppalapudi
-
-// Theme Toggle Functionality
 const themeToggle = document.getElementById('theme-toggle');
 const html = document.documentElement;
 
 function toggleTheme() {
     if (html.getAttribute('data-theme') === 'dark') {
         html.removeAttribute('data-theme');
-        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        if (themeToggle) themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
         localStorage.setItem('theme', 'light');
     } else {
         html.setAttribute('data-theme', 'dark');
-        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        if (themeToggle) themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
         localStorage.setItem('theme', 'dark');
     }
 }
@@ -21,16 +17,11 @@ if (themeToggle) {
     themeToggle.addEventListener('click', toggleTheme);
 }
 
-// Load saved theme on page load
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme === 'dark') {
+if (localStorage.getItem('theme') === 'dark') {
     html.setAttribute('data-theme', 'dark');
-    if (themeToggle) {
-        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-    }
+    if (themeToggle) themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
 }
 
-// Mobile Menu Toggle
 const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
 const navLinks = document.querySelector('.nav-links');
 
@@ -38,12 +29,9 @@ if (mobileMenuBtn && navLinks) {
     mobileMenuBtn.addEventListener('click', function () {
         navLinks.classList.toggle('active');
         const icon = mobileMenuBtn.querySelector('i');
-        if (navLinks.classList.contains('active')) {
-            icon.classList.remove('fa-bars');
-            icon.classList.add('fa-times');
-        } else {
-            icon.classList.remove('fa-times');
-            icon.classList.add('fa-bars');
+        if (icon) {
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
         }
     });
 
@@ -51,30 +39,33 @@ if (mobileMenuBtn && navLinks) {
         link.addEventListener('click', function () {
             navLinks.classList.remove('active');
             const icon = mobileMenuBtn.querySelector('i');
-            icon.classList.remove('fa-times');
-            icon.classList.add('fa-bars');
+            if (icon) {
+                icon.classList.add('fa-bars');
+                icon.classList.remove('fa-times');
+            }
         });
     });
 }
 
-// Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         const href = this.getAttribute('href');
-        if (href.length > 1) {
-            e.preventDefault();
+        if (href && href.length > 1) {
             const target = document.querySelector(href);
             if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
+                e.preventDefault();
+                const navbar = document.querySelector('.navbar');
+                const offset = navbar ? navbar.offsetHeight : 70;
+                const topPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                window.scrollTo({
+                    top: topPosition,
+                    behavior: 'smooth'
                 });
             }
         }
     });
 });
 
-// Active navigation state indicator
 function updateActiveNav() {
     const scrollPosition = window.scrollY + 120;
     const sections = document.querySelectorAll('section');
@@ -87,7 +78,7 @@ function updateActiveNav() {
         if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
             navItems.forEach(item => {
                 item.classList.remove('active');
-                if (item.getAttribute('href').substring(1) === sectionId) {
+                if (item.getAttribute('href') === '#' + sectionId) {
                     item.classList.add('active');
                 }
             });
@@ -97,7 +88,6 @@ function updateActiveNav() {
 
 window.addEventListener('scroll', updateActiveNav);
 
-// Work Experience Category Filtering
 const filterButtons = document.querySelectorAll('.filter-btn');
 const experienceCards = document.querySelectorAll('.project-card');
 
@@ -119,7 +109,6 @@ filterButtons.forEach(btn => {
     });
 });
 
-// Contact Form Validation
 const contactForm = document.getElementById('contact-form');
 
 function isValidEmail(email) {
@@ -139,9 +128,7 @@ function showError(input, message) {
 
 function clearError(input) {
     const existing = input.parentElement.querySelector('.error-message');
-    if (existing) {
-        existing.remove();
-    }
+    if (existing) existing.remove();
 }
 
 if (contactForm) {
@@ -153,27 +140,29 @@ if (contactForm) {
         const message = document.getElementById('message');
         let isValid = true;
 
-        [name, email, subject, message].forEach(clearError);
+        [name, email, subject, message].forEach(el => {
+            if (el) clearError(el);
+        });
 
-        if (!name.value.trim()) {
+        if (name && !name.value.trim()) {
             showError(name, 'Name is required');
             isValid = false;
         }
 
-        if (!email.value.trim()) {
+        if (email && !email.value.trim()) {
             showError(email, 'Email is required');
             isValid = false;
-        } else if (!isValidEmail(email.value)) {
+        } else if (email && !isValidEmail(email.value)) {
             showError(email, 'Please enter a valid email');
             isValid = false;
         }
 
-        if (!subject.value.trim()) {
+        if (subject && !subject.value.trim()) {
             showError(subject, 'Subject is required');
             isValid = false;
         }
 
-        if (!message.value.trim()) {
+        if (message && !message.value.trim()) {
             showError(message, 'Message is required');
             isValid = false;
         }
