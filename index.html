@@ -1,139 +1,69 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sudheernaidu Doppalapudi | Senior Support & Infrastructure Engineer</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cloudflare.com">
-    <link href="https://googleapis.com" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1220">
+  <meta name="description" content="Sudheernaidu Doppalapudi — IT production support, infrastructure administration, incident management and cloud operations.">
+  <title>Sudheernaidu Doppalapudi | IT Support & Infrastructure</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="#home" class="logo">Portfolio.</a>
-            <ul class="nav-links">
-                <li><a href="#home" class="nav-link active">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#projects" class="nav-link">Experience</a></li>
-                <li><a href="#skills" class="nav-link">Skills</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
-            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-                <i class="fas fa-moon"></i>
-            </button>
-            <button class="mobile-menu-btn" aria-label="Open menu">
-                <i class="fas fa-bars"></i>
-            </button>
-        </div>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <nav class="nav shell" aria-label="Main navigation">
+      <a class="brand" href="#home"><span class="brand-mark">SD</span><span>Sudheer<span class="brand-accent">.</span></span></a>
+      <button class="menu-toggle" type="button" aria-label="Open navigation" aria-controls="nav-links" aria-expanded="false"><span></span><span></span><span></span></button>
+      <div class="nav-links" id="nav-links">
+        <a href="#home">Home</a><a href="#about">About</a><a href="#experience">Experience</a><a href="#skills">Skills</a><a href="#contact">Contact</a>
+        <button class="theme-toggle" type="button" aria-label="Switch color theme" title="Switch color theme">☀</button>
+      </div>
     </nav>
-
-    <section id="home" class="hero">
-        <div class="hero-container">
-            <div class="hero-content">
-                <h1 class="hero-title">Hi, I'm <span class="highlight">Sudheernaidu Doppalapudi</span></h1>
-                <p class="hero-subtitle">Senior IT Support Engineer &amp; Infrastructure Administrator</p>
-                <div class="hero-description">
-                    <p>Dedicated IT professional specializing in Oracle databases, cloud services, and Windows/Linux enterprise administration with 10+ years of 24/7 operations experience.</p>
-                </div>
-                <div class="hero-buttons">
-                    <a href="#projects" class="btn btn-primary">View Experience</a>
-                    <a href="resume.docx" download class="btn btn-secondary"><i class="fas fa-download"></i> Download Resume</a>
-                </div>
-            </div>
-            <div class="hero-image">
-                <div class="image-container">
-                    <img src="profile.jpg" alt="Sudheernaidu Doppalapudi" class="profile-img">
-                </div>
-            </div>
+  </header>
+  <main id="main">
+    <section class="hero section" id="home">
+      <div class="shell hero-layout">
+        <div>
+          <div class="eyebrow"><span class="status-dot"></span> IT Operations • Infrastructure • Service Management</div>
+          <h1>Keeping critical systems <span class="gradient-text">running smoothly.</span></h1>
+          <p class="hero-lead">Hi, I'm <strong>Sudheernaidu Doppalapudi</strong> — a Senior Support Engineer focused on 24/7 production operations, incident resolution, infrastructure administration and reliable IT service delivery.</p>
+          <div class="hero-actions"><a class="btn btn-primary" href="#experience">Explore my experience <span aria-hidden="true">↗</span></a><a class="btn btn-outline" href="resume.docx" download>Download résumé ↓</a></div>
+          <div class="quick-facts"><span>ITIL / ITSM</span><span>Linux & Windows</span><span>AWS Cloud Practitioner</span></div>
         </div>
+        <div class="hero-visual" aria-label="Professional profile panel">
+          <div class="profile-frame"><img src="profile.jpg" alt="Portrait of Sudheernaidu Doppalapudi" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><div class="photo-fallback" hidden>SD</div></div>
+          <div class="visual-label"><span class="status-dot"></span> Production Support & Cloud Operations</div>
+        </div>
+      </div>
     </section>
-
-    <section id="about" class="about">
-        <div class="container">
-            <h2 class="section-title">About <span>Me</span></h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>Seasoned IT professional with a Master's in Applied Computing from Napier University, Edinburgh (2009), experienced in 24/7 production operations and cloud infrastructure.</p>
-                    <div class="about-stats">
-                        <div class="stat-item">
-                            <span class="stat-number">10+</span>
-                            <span class="stat-label">Years Experience</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">AWS</span>
-                            <span class="stat-label">Certified Cloud Practitioner</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">24/7</span>
-                            <span class="stat-label">Production Operations</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <section class="section about-section" id="about">
+      <div class="shell"><div class="section-heading"><span class="kicker">01 / About</span><h2>Technology, reliability <span class="muted">and people.</span></h2></div>
+        <div class="about-layout"><div class="prose"><p>I am an IT support and infrastructure professional with experience supporting business-critical services across production environments. My work spans L1/L2 operations, incident and SLA management, Oracle database support, application monitoring and systems administration.</p><p>I work with technical teams, service owners and customers to resolve incidents, coordinate escalations, maintain service availability and document repeatable operational processes.</p></div>
+        <div class="fact-grid"><div class="fact"><strong>24/7</strong><span>Production operations</span></div><div class="fact"><strong>ITIL</strong><span>Incident & service management</span></div><div class="fact"><strong>AWS</strong><span>Certified Cloud Practitioner</span></div><div class="fact"><strong>MSc</strong><span>Applied Computing, Edinburgh Napier University</span></div></div></div>
+      </div>
     </section>
-
-    <section id="projects" class="projects">
-        <div class="container">
-            <h2 class="section-title">Work <span>Experience</span></h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <h3 class="project-title">Senior Support Engineer — Tech Mahindra Ltd. (2021 – Present)</h3>
-                    <p class="project-description">Manage 24/7 L1/L2 production operations, ITIL incident resolution, and SLA compliance.</p>
-                </div>
-                <div class="project-card">
-                    <h3 class="project-title">Staff Consultant — IT Convergence Pvt. Ltd. (2018 – 2021)</h3>
-                    <p class="project-description">Provided 24/7 database administration and multi-account support.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="skills" class="skills">
-        <div class="container">
-            <h2 class="section-title">Technical <span>Skills</span></h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3>Databases &amp; Languages</h3>
-                    <div class="skill-items">
-                        <span class="skill-tag">Oracle</span>
-                        <span class="skill-tag">MS SQL Server</span>
-                        <span class="skill-tag">SQL/PLSQL</span>
-                        <span class="skill-tag">HTML/JS</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>Cloud &amp; DevOps</h3>
-                    <div class="skill-items">
-                        <span class="skill-tag">AWS</span>
-                        <span class="skill-tag">Azure</span>
-                        <span class="skill-tag">VMware</span>
-                        <span class="skill-tag">Jenkins</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2 class="section-title">Get In <span>Touch</span></h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h3>Sudheernaidu Doppalapudi</h3>
-                    <p>Email: sudheernaidud@gmail.com | Phone: +91 7093345685 | Location: Hyderabad, India</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2026 Sudheernaidu Doppalapudi. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script src="app.js"></script>
+    <section class="section experience-section" id="experience"><div class="shell"><div class="section-heading"><span class="kicker">02 / Career</span><h2>Professional <span class="muted">experience.</span></h2><p>Support, administration and operations roles across enterprise environments.</p></div>
+      <div class="timeline">
+        <article class="job"><div class="job-date">Jun 2021 – Present</div><div class="job-body"><div class="job-top"><h3>Senior Support Engineer</h3><span class="company">Tech Mahindra · Hyderabad</span></div><p>24/7 L1/L2 production support, incident and SLA management, deployment support, virtualized infrastructure administration, monitoring and ServiceNow reporting.</p><div class="mini-tags"><span>ServiceNow</span><span>Grafana</span><span>Datadog</span><span>VMware</span><span>OpenStack</span><span>Jenkins</span></div></div></article>
+        <article class="job"><div class="job-date">Jun 2018 – May 2021</div><div class="job-body"><div class="job-top"><h3>Staff Consultant</h3><span class="company">IT Convergence · Hyderabad</span></div><p>Oracle database monitoring and troubleshooting, operational maintenance, ticket coordination, production deployments, backups and service management.</p><div class="mini-tags"><span>Oracle</span><span>ITIL</span><span>ServiceNow</span><span>Database Support</span></div></div></article>
+        <article class="job"><div class="job-date">Jun 2016 – Jun 2017</div><div class="job-body"><div class="job-top"><h3>1st Line Application Support Analyst</h3><span class="company">Accutor · United Kingdom</span></div><p>Application and server monitoring, incident queue management, vendor coordination, release support and customer communications.</p><div class="mini-tags"><span>BMC Remedy</span><span>IIS</span><span>SQL Server</span><span>Windows Server</span></div></div></article>
+        <article class="job"><div class="job-date">Apr 2015 – Jun 2016</div><div class="job-body"><div class="job-top"><h3>IT Support Service Desk Analyst</h3><span class="company">Lynn Recruitment Consultant · United Kingdom</span></div><p>End-user support, incident ownership, Windows troubleshooting, remote access support and escalation coordination.</p><div class="mini-tags"><span>TopDesk</span><span>Active Directory</span><span>Scout</span><span>Kofax</span></div></div></article>
+        <article class="job"><div class="job-date">Sep 2005 – Feb 2006</div><div class="job-body"><div class="job-top"><h3>Service Desk Data Administrator</h3><span class="company">Bharti Infotel · Delhi</span></div><p>HP OpenView service desk administration, user access, circuit records, reporting and NOC coordination.</p><div class="mini-tags"><span>HP OpenView</span><span>Service Desk</span><span>NOC</span></div></div></article>
+      </div><details class="earlier-role"><summary>Additional professional experience</summary><p><strong>Quality Control / Stock Replenishing — Tesco, Edinburgh, UK (Aug 2008 – Jan 2014).</strong> Customer service, stock operations, supplier coordination and team support.</p></details>
+      </div></section>
+    <section class="section skills-section" id="skills"><div class="shell"><div class="section-heading"><span class="kicker">03 / Toolkit</span><h2>Technical <span class="muted">skills.</span></h2><p>My existing portfolio skills, expanded with the tools and technologies from my résumé.</p></div>
+      <div class="skills-grid">
+        <article class="skill-category"><div class="skill-icon">⌘</div><h3>Databases & Languages</h3><div class="skill-items"><span class="skill-tag">Oracle</span><span class="skill-tag">MS SQL Server</span><span class="skill-tag">SQL / PLSQL</span><span class="skill-tag">HTML / JavaScript</span><span class="skill-tag">.NET</span></div></article>
+        <article class="skill-category"><div class="skill-icon">☁</div><h3>Cloud & DevOps</h3><div class="skill-items"><span class="skill-tag">AWS</span><span class="skill-tag">Azure</span><span class="skill-tag">VMware</span><span class="skill-tag">Jenkins</span><span class="skill-tag">GitLab</span><span class="skill-tag">OpenStack</span><span class="skill-tag">XCP-ng / XOA</span><span class="skill-tag">JIRA</span><span class="skill-tag">Bugzilla</span><span class="skill-tag">TestRail</span></div></article>
+        <article class="skill-category"><div class="skill-icon">◉</div><h3>Monitoring & ITSM Tools</h3><div class="skill-items"><span class="skill-tag">ServiceNow</span><span class="skill-tag">BMC Remedy</span><span class="skill-tag">TopDesk</span><span class="skill-tag">HP OpenView (HPOV)</span><span class="skill-tag">Grafana</span><span class="skill-tag">Datadog</span><span class="skill-tag">SolarWinds</span><span class="skill-tag">Nagios</span><span class="skill-tag">MAS</span><span class="skill-tag">Scout</span><span class="skill-tag">Kofax</span><span class="skill-tag">Openreach</span><span class="skill-tag">BT Wholesale</span></div></article>
+        <article class="skill-category"><div class="skill-icon">▣</div><h3>Operating Systems & Administration</h3><div class="skill-items"><span class="skill-tag">RHEL Linux</span><span class="skill-tag">Ubuntu</span><span class="skill-tag">Windows Server 2008 / 2012</span><span class="skill-tag">Windows Family</span><span class="skill-tag">Active Directory (LDAP)</span><span class="skill-tag">Azure AD</span><span class="skill-tag">IIS Server</span><span class="skill-tag">AWS CLI</span></div></article>
+        <article class="skill-category"><div class="skill-icon">↗</div><h3>Remote Access & Administration</h3><div class="skill-items"><span class="skill-tag">PuTTY</span><span class="skill-tag">SuperPuTTY</span><span class="skill-tag">MobaXterm</span><span class="skill-tag">Pulse Secure</span></div></article>
+        <article class="skill-category"><div class="skill-icon">✦</div><h3>Enterprise Applications & Practices</h3><div class="skill-items"><span class="skill-tag">Lotus Notes</span><span class="skill-tag">ITIL</span><span class="skill-tag">Incident Management</span><span class="skill-tag">SLA Management</span><span class="skill-tag">Change Management</span><span class="skill-tag">Problem Management</span></div></article>
+      </div></div></section>
+    <section class="section education-section" id="education"><div class="shell"><div class="section-heading"><span class="kicker">04 / Credentials</span><h2>Education & <span class="muted">certification.</span></h2></div><div class="credential-grid"><article class="credential"><span class="credential-symbol">🎓</span><div><h3>Master's in Applied Computing</h3><p>Edinburgh Napier University, UK</p><span>2007 – 2009</span></div></article><article class="credential"><span class="credential-symbol">✧</span><div><h3>AWS Certified Cloud Practitioner</h3><p>Amazon Web Services</p><span>Certification listed in résumé</span></div></article></div></div></section>
+    <section class="section contact-section" id="contact"><div class="shell contact-panel"><div><span class="kicker">05 / Contact</span><h2>Let's connect.</h2><p>Interested in discussing IT operations, service management or infrastructure support? Reach out by email or phone.</p><a class="btn btn-primary" href="mailto:sudheernaidud@gmail.com">Send an email ↗</a></div><div class="contact-details"><div><span>Email</span><a href="mailto:sudheernaidud@gmail.com">sudheernaidud@gmail.com</a></div><div><span>Phone</span><a href="tel:+917093345685">+91 7093345685</a></div><div><span>Location</span><strong>Hyderabad, India</strong></div></div></div></section>
+  </main>
+  <footer class="site-footer"><div class="shell footer-inner"><span>© <span id="year">2026</span> Sudheernaidu Doppalapudi</span><a href="#home">Back to top ↑</a></div></footer>
 </body>
 </html>
