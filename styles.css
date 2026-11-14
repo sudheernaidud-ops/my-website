@@ -43,5 +43,8 @@
         width: 200px;
         height: 200px;
     }
+  @media (max-width: 768px) { 
+      .scroll-hint { display: none; }
+  }  
 }
 
