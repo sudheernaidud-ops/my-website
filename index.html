@@ -187,5 +187,103 @@
     <a href="#home">Back to top ↑</a>
   </div>
 </footer>
+
+  <!-- Floating Profile Assistant Widget (Option 2) -->
+<div id="sd-chat-widget" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; font-family: inherit;">
+  <button id="sd-chat-toggle" type="button" style="background: #0ea5e9; color: #ffffff; border: none; border-radius: 999px; padding: 12px 18px; font-size: 0.9rem; font-weight: 600; cursor: pointer; box-shadow: 0 8px 24px rgba(14, 165, 233, 0.35); display: flex; align-items: center; gap: 8px;">
+    <span>💬 Ask Sudheer's Assistant</span>
+  </button>
+
+  <div id="sd-chat-box" style="display: none; width: 330px; max-width: calc(100vw - 32px); background: #0f172a; color: #f8fafc; border: 1px solid rgba(148, 163, 184, 0.3); border-radius: 16px; box-shadow: 0 16px 40px rgba(0,0,0,0.45); overflow: hidden; margin-bottom: 12px; position: absolute; bottom: 52px; right: 0;">
+    <div style="background: #1e293b; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(148, 163, 184, 0.2);">
+      <div>
+        <strong style="font-size: 0.92rem; display: block;">Sudheer's Career Assistant</strong>
+        <span style="font-size: 0.75rem; color: #10b981;">● Online · Instant Profile Q&amp;A</span>
+      </div>
+      <button id="sd-chat-close" type="button" style="background: none; border: none; color: #94a3b8; font-size: 1.2rem; cursor: pointer;">✕</button>
+    </div>
+
+    <div id="sd-chat-messages" style="padding: 12px; height: 240px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; font-size: 0.85rem; line-height: 1.45;">
+      <div style="background: #1e293b; padding: 10px 12px; border-radius: 12px; align-self: flex-start; max-width: 88%;">
+        Hi! I'm Sudheer's virtual assistant. Ask about his <strong>experience</strong>, <strong>15-member team leadership</strong>, <strong>skills</strong>, or <strong>ping him directly</strong> below!
+      </div>
+    </div>
+
+    <div style="padding: 8px 12px; display: flex; flex-wrap: wrap; gap: 6px; border-top: 1px solid rgba(148, 163, 184, 0.15); background: #0b1220;">
+      <button type="button" class="sd-chip" data-q="Summarize Sudheer's experience" style="background: #1e293b; color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 999px; padding: 4px 10px; font-size: 0.74rem; cursor: pointer;">Experience</button>
+      <button type="button" class="sd-chip" data-q="Tell me about his team lead role" style="background: #1e293b; color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 999px; padding: 4px 10px; font-size: 0.74rem; cursor: pointer;">Team Lead (15 ppl)</button>
+      <button type="button" class="sd-chip" data-q="What are his core technical skills?" style="background: #1e293b; color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 999px; padding: 4px 10px; font-size: 0.74rem; cursor: pointer;">Tech Skills</button>
+      <button type="button" class="sd-chip" data-q="How can I contact or ping Sudheer?" style="background: #1e293b; color: #10b981; border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 999px; padding: 4px 10px; font-size: 0.74rem; cursor: pointer;">Ping Sudheer ↗</button>
+    </div>
+
+    <form id="sd-chat-form" style="display: flex; border-top: 1px solid rgba(148, 163, 184, 0.2); background: #1e293b;">
+      <input id="sd-chat-input" type="text" placeholder="Ask a question or type message..." required style="flex: 1; background: transparent; border: none; color: #f8fafc; padding: 10px 12px; font-size: 0.85rem; outline: none;">
+      <button type="submit" style="background: #0ea5e9; color: #fff; border: none; padding: 0 14px; font-weight: 600; cursor: pointer;">Send</button>
+    </form>
+  </div>
+</div>
+
+<script>
+(function() {
+  const toggleBtn = document.getElementById('sd-chat-toggle');
+  const closeBtn = document.getElementById('sd-chat-close');
+  const chatBox = document.getElementById('sd-chat-box');
+  const messages = document.getElementById('sd-chat-messages');
+  const form = document.getElementById('sd-chat-form');
+  const input = document.getElementById('sd-chat-input');
+
+  toggleBtn.addEventListener('click', () => {
+    chatBox.style.display = chatBox.style.display === 'none' ? 'block' : 'none';
+  });
+  closeBtn.addEventListener('click', () => { chatBox.style.display = 'none'; });
+
+  function addMessage(html, isUser) {
+    const div = document.createElement('div');
+    div.style.padding = '9px 12px';
+    div.style.borderRadius = '12px';
+    div.style.maxWidth = '88%';
+    div.style.alignSelf = isUser ? 'flex-end' : 'flex-start';
+    div.style.background = isUser ? '#0284c7' : '#1e293b';
+    div.innerHTML = html;
+    messages.appendChild(div);
+    messages.scrollTop = messages.scrollHeight;
+  }
+
+  function getReply(q) {
+    const text = q.toLowerCase();
+    if (text.includes('lead') || text.includes('team') || text.includes('15') || text.includes('roster')) {
+      return "Since <strong>Jan 2024</strong> at Tech Mahindra, Sudheer leads a <strong>15-member operations team</strong>—managing shift rosters, leave/timesheet approvals, performance appraisals, bug queue triage, client evaluation launches, and mandatory certifications.";
+    }
+    if (text.includes('skill') || text.includes('tool') || text.includes('oracle') || text.includes('aws') || text.includes('servicenow')) {
+      return "Core toolkit: <strong>ServiceNow ITSM</strong>, <strong>Oracle & MS SQL Server</strong>, <strong>AWS (Certified Cloud Practitioner) & Azure</strong>, <strong>Linux/Windows Server</strong>, <strong>Grafana & Datadog</strong>, VMware, OpenStack, and ITIL Incident/Problem/Change Management.";
+    }
+    if (text.includes('exp') || text.includes('career') || text.includes('work') || text.includes('history') || text.includes('summary')) {
+      return "Sudheer has <strong>10+ years of IT Support & Infrastructure experience</strong> across India and the UK (Tech Mahindra, IT Convergence, Accutor UK, Bharti Infotel) plus an <strong>MSc in Applied Computing</strong> from Edinburgh Napier University, UK.";
+    }
+    if (text.includes('contact') || text.includes('ping') || text.includes('email') || text.includes('phone') || text.includes('reach') || text.includes('hire')) {
+      return 'You can reach Sudheer directly:<br>📧 <a href="mailto:sudheernaidud@://gmail.com" style="color:#38bdf8;">sudheernaidud@gmail.com</a><br>💬 <a href="https://wa.me" target="_blank" style="color:#10b981;">Ping on WhatsApp ↗</a>';
+    }
+    return 'I currently answer questions about Sudheer\'s <strong>experience</strong>, <strong>15-member team leadership</strong>, <strong>technical skills</strong>, or <strong>contact options</strong>—or you can <a href="mailto:sudheernaidud@://gmail.com' + encodeURIComponent(q) + '" style="color:#38bdf8;">send this message directly to his email ↗</a>.';
+  }
+
+  document.querySelectorAll('.sd-chip').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const q = btn.getAttribute('data-q');
+      addMessage(q, true);
+      setTimeout(() => addMessage(getReply(q), false), 250);
+    });
+  });
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const q = input.value.trim();
+    if (!q) return;
+    addMessage(q, true);
+    input.value = '';
+    setTimeout(() => addMessage(getReply(q), false), 250);
+  });
+})();
+</script>
+
 </body>
 </html>
