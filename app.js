@@ -133,3 +133,72 @@
   });
 })();
 
+(function() {
+  const toggleBtn = document.getElementById('sd-chat-toggle');
+  const closeBtn = document.getElementById('sd-chat-close');
+  const chatBox = document.getElementById('sd-chat-box');
+  const messages = document.getElementById('sd-chat-messages');
+  const form = document.getElementById('sd-chat-form');
+  const input = document.getElementById('sd-chat-input');
+
+  if (!toggleBtn || !chatBox) return;
+
+  toggleBtn.addEventListener('click', () => {
+    chatBox.style.display = chatBox.style.display === 'none' ? 'block' : 'none';
+  });
+  closeBtn.addEventListener('click', () => { chatBox.style.display = 'none'; });
+
+  function addMessage(html, isUser) {
+    const div = document.createElement('div');
+    div.style.padding = '9px 12px';
+    div.style.borderRadius = '12px';
+    div.style.maxWidth = '88%';
+    div.style.alignSelf = isUser ? 'flex-end' : 'flex-start';
+    div.style.background = isUser ? '#0284c7' : '#1e293b';
+    div.innerHTML = html;
+    messages.appendChild(div);
+    messages.scrollTop = messages.scrollHeight;
+    return div;
+  }
+
+  async function askGemini(question) {
+    const text = question.toLowerCase();
+    if (text.includes('ping') || text.includes('whatsapp') || text.includes('contact') || text.includes('hire')) {
+      addMessage('You can reach Sudheer directly:<br>📧 <a href="mailto:sudheernaidud@://gmail.com" style="color:#38bdf8;">sudheernaidud@gmail.com</a><br>💬 <a href="https://wa.me" target="_blank" rel="noopener" style="color:#10b981;">Ping on WhatsApp ↗</a>', false);
+      return;
+    }
+
+    const typingBubble = addMessage('<em style="opacity:0.75;">Thinking...</em>', false);
+
+    try {
+      const res = await fetch('/.netlify/functions/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: question })
+      });
+      const data = await res.json();
+      typingBubble.innerHTML = (data.reply || 'No response received.').replace(/\n/g, '<br>');
+    } catch (e) {
+      typingBubble.innerHTML = 'Unable to reach AI right now. Email Sudheer at <a href="mailto:sudheernaidud@gmail.com" style="color:#38bdf8;">sudheernaidud@gmail.com</a>.';
+    }
+  }
+
+  document.querySelectorAll('.sd-chip').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const q = btn.getAttribute('data-q');
+      addMessage(q, true);
+      askGemini(q);
+    });
+  });
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const q = input.value.trim();
+    if (!q) return;
+    addMessage(q, true);
+    input.value = '';
+    askGemini(q);
+  });
+})();
+
+
