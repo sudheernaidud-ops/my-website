@@ -150,6 +150,7 @@ setActiveLink();
   }
 })();*/
 // --- ACTIVE VERSION FOR GITHUB PAGES ---
+// --- ACTIVE VERSION FOR GITHUB PAGES (PROFILE + GENERAL AI) ---
 (function () {
   const toggleBtn = document.getElementById('sd-chat-toggle');
   const closeBtn = document.getElementById('sd-chat-close');
@@ -181,9 +182,10 @@ setActiveLink();
     div.innerHTML = html;
     messages.appendChild(div);
     messages.scrollTop = messages.scrollHeight;
+    return div;
   }
 
-  function getReply(q) {
+  function getProfileReply(q) {
     const text = q.toLowerCase();
     if (text.includes('lead') || text.includes('team') || text.includes('15') || text.includes('roster')) {
       return "Since <strong>Jan 2024</strong> at Tech Mahindra, Sudheer leads a <strong>15-member operations team</strong>—managing shift rosters, leave/timesheet approvals, performance appraisals, bug queue triage, client evaluation launches, and mandatory certifications.";
@@ -199,15 +201,35 @@ setActiveLink();
       const waLink = 'https://' + 'wa.me/917093345685?text=Hi%20Sudheer%2C%20I%20visited%20your%20IT%20Operations%20portfolio';
       return 'You can reach Sudheer directly:<br>📧 <a href="' + emailLink + '" style="color:#38bdf8;">sudheernaidud@gmail.com</a><br>💬 <a href="' + waLink + '" target="_blank" rel="noopener" style="color:#10b981;">Ping on WhatsApp ↗</a>';
     }
-    const directEmail = 'mailto:' + 'sudheernaidud@' + '://gmail.com' + encodeURIComponent(q);
-    return 'I answer questions about Sudheer\'s <strong>experience</strong>, <strong>15-member team leadership</strong>, <strong>technical skills</strong>, or <strong>contact options</strong>—or you can <a href="' + directEmail + '" style="color:#38bdf8;">send your question directly to his email ↗</a>.';
+    return null;
+  }
+
+  async function handleQuestion(q) {
+    const profileAnswer = getProfileReply(q);
+    if (profileAnswer) {
+      setTimeout(() => addMessage(profileAnswer, false), 250);
+      return;
+    }
+
+    const typingBubble = addMessage('<em style="opacity:0.75;">Thinking...</em>', false);
+
+    try {
+      const prompt = "You are Sudheernaidu Doppalapudi's helpful AI assistant on his IT Operations portfolio. Answer concisely in 2 to 4 sentences: " + q;
+      const aiUrl = "https://" + "text.pollinations.ai/" + encodeURIComponent(prompt);
+      const res = await fetch(aiUrl);
+      const replyText = await res.text();
+      typingBubble.innerHTML = replyText ? replyText.replace(/\n/g, '<br>') : "I couldn't fetch an answer right now.";
+    } catch (err) {
+      const directEmail = 'mailto:' + 'sudheernaidud@' + '://gmail.com' + encodeURIComponent(q);
+      typingBubble.innerHTML = 'AI service is temporarily busy. You can <a href="' + directEmail + '" style="color:#38bdf8;">email your question directly to Sudheer ↗</a>.';
+    }
   }
 
   document.querySelectorAll('.sd-chip').forEach(btn => {
     btn.addEventListener('click', () => {
       const q = btn.getAttribute('data-q');
       addMessage(q, true);
-      setTimeout(() => addMessage(getReply(q), false), 250);
+      handleQuestion(q);
     });
   });
 
@@ -218,8 +240,7 @@ setActiveLink();
       if (!q) return;
       addMessage(q, true);
       input.value = '';
-      setTimeout(() => addMessage(getReply(q), false), 250);
+      handleQuestion(q);
     });
   }
 })();
-
